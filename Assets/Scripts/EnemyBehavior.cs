@@ -6,18 +6,18 @@ using UnityEngine.UIElements;
 public class EnemyBehavior : MonoBehaviour
 {
     private Rigidbody targetRB;
-    private GameManager gameManager;
+    private GameManager gameManager; // INHERITANCE
     private float maxTorque = 10;
     private float xRange = 48;
     private float zSpawnPos = 130;
-    private Vector3 force = Vector3.back * 1;
+    private Vector3 force = Vector3.back * 1; // ENCAPSULATION
     private string enemyName;
 
 
     public ParticleSystem explosionParticle;
     public int pointValue;
-    private float enemySpeed;
-    private float enemySpawn;
+    private float enemySpeed; // ENCAPSULATION
+    private float enemySpawn; // ENCAPSULATION
 
     // Start is called before the first frame update
     void Start()

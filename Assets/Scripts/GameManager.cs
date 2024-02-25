@@ -17,10 +17,10 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     public Button restartButton;
 
-    private int score;
+    private int score; // ENCAPSULATION
     public float spawnRate = 1.0f;
 
-    IEnumerator SpawnTarget()
+    IEnumerator SpawnTarget() // POLYMORPHISM
     {
         while (isGameActive)
         {

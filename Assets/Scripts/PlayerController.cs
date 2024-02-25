@@ -7,12 +7,12 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameManager gameManager;
+    private GameManager gameManager; // INHERITANCE
     private float horizontalInput;
     public float speed = 10.0f;
-    private float xRange = 45;
+    private float xRange = 45; // ENCAPSULATION
     public TextMeshProUGUI score;
-    private Rigidbody playerRb;
+    private Rigidbody playerRb; // ENCAPSULATION
     //private Quaternion startRotation;
 
     private void Start()
@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (gameManager.isGameActive == true)
+        if (gameManager.isGameActive == true) // INHERITANCE
         {
-            BounderiesAndMove();
-            Shoot();
-            playerAnimation();
+            BounderiesAndMove();// ABSTRACTION
+            Shoot();// ABSTRACTION
+            playerAnimation();// ABSTRACTION
         }
     }
     void playerAnimation()

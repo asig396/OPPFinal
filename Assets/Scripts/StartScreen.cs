@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class StartScreen : MonoBehaviour
 {
     private Button button;
-    private GameManager gameManager;
+    private GameManager gameManager; // INHERITANCE
     public int difficulty;
 
     // Start is called before the first frame update
