@@ -8,16 +8,12 @@ public class ObjectPooler : MonoBehaviour
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
     public int amountToPool;
-
     void Awake()
     {
         SharedInstance = this;
     }
-
-    // Start is called before the first frame update
     void Start()
     {
-        // Loop through list of pooled objects,deactivating them and adding them to the list 
         pooledObjects = new List<GameObject>();
         for (int i = 0; i < amountToPool; i++)
         {
@@ -27,29 +23,15 @@ public class ObjectPooler : MonoBehaviour
             obj.transform.SetParent(this.transform); // set as children of Spawn Manager
         }
     }
-
     public GameObject GetPooledObject()
     {
-        // For as many objects as are in the pooledObjects list
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            // if the pooled objects is NOT active, return that object 
             if (!pooledObjects[i].activeInHierarchy)
             {
                 return pooledObjects[i];
             }
         }
-        // otherwise, return null   
         return null;
     }
-    void OnTriggerEnter(Collider other)
-    {
-        // Instead of destroying the projectile when it collides with an animal
-        //Destroy(other.gameObject); 
-
-        // Just deactivate the food and destroy the animal
-        other.gameObject.SetActive(false);
-        Destroy(gameObject);
-    }
-
 }
