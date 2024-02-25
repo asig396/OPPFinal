@@ -7,28 +7,43 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameManager gameManager;
     private float horizontalInput;
-    private float speed = 60.0f;
+    public float speed = 10.0f;
     private float xRange = 45;
     public TextMeshProUGUI score;
-    private int valor = 1;
-    private float timeElapsed;
+    private Rigidbody playerRb;
+    //private Quaternion startRotation;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerRb = GetComponent<Rigidbody>();
+    }
     void Update()
     {
-        timeElapsed += Time.deltaTime;
-        if (timeElapsed > valor)
+        if (gameManager.isGameActive == true)
         {
-            score.text = "Score: " + valor;
-            valor += 1;
+            BounderiesAndMove();
+            Shoot();
+            playerAnimation();
         }
-
-        BounderiesAndMove();
-        Shoot();
+    }
+    void playerAnimation()
+    {
+        if (transform.position.z != 0)
+        { 
+        transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, speed * Time.deltaTime);
+        }
+        //Quaternion targetRotation = Quaternion.Euler(Vector3.zero);
+        //transform.rotation = Quaternion.Slerp(startRotation, targetRotation, Time.deltaTime * 10);
     }
     void BounderiesAndMove()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+        playerRb.AddForce(Vector3.right * horizontalInput * speed);
+
+        //transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
         if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
@@ -46,7 +61,7 @@ public class PlayerController : MonoBehaviour
             if (pooledProjectile != null)
             {
                 pooledProjectile.SetActive(true); // activate it
-                pooledProjectile.transform.position = transform.position; // position it at player
+                pooledProjectile.transform.position = transform.position + Vector3.forward * 7; // position it at player
             }
         }
     }
